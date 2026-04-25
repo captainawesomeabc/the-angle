@@ -9,22 +9,29 @@
 <link rel="icon" href="icon-192.png">
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:#000;color:#fff;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
-  
-  /* Header */
+  body{background:#000;color:#fff;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;overflow-x:hidden}
+
+  /* === SCREENS === */
+  .screen{display:none;flex-direction:column;min-height:100vh;min-height:100dvh}
+  .screen.active{display:flex}
+
+  /* === HEADER === */
   .header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(212,175,55,0.2)}
   .logo{font-size:20px;font-weight:700;color:#D4AF37;display:flex;align-items:center;gap:8px}
   .logo span{font-size:24px}
+  .header-right{display:flex;align-items:center;gap:12px}
   .streak-badge{background:linear-gradient(135deg,#D4AF37,#B8941F);color:#000;font-weight:800;padding:6px 14px;border-radius:20px;font-size:14px;display:flex;align-items:center;gap:6px}
   .streak-badge .fire{font-size:16px}
-  
-  /* XP Bar */
+  .profile-btn{width:36px;height:36px;border-radius:50%;background:rgba(212,175,55,0.2);border:2px solid #D4AF37;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all 0.2s}
+  .profile-btn:hover{background:rgba(212,175,55,0.3)}
+
+  /* === XP BAR === */
   .xp-bar-container{padding:12px 20px;background:rgba(212,175,55,0.05)}
   .xp-label{font-size:12px;color:#D4AF37;margin-bottom:4px;display:flex;justify-content:space-between}
   .xp-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:3px;overflow:hidden}
   .xp-fill{height:100%;background:linear-gradient(90deg,#D4AF37,#FFD700);border-radius:3px;transition:width 0.6s cubic-bezier(0.4,0,0.2,1)}
-  
-  /* Card Area */
+
+  /* === CARD AREA === */
   .card-area{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
   .card{background:linear-gradient(145deg,#1a1a1a,#0d0d0d);border:1px solid rgba(212,175,55,0.3);border-radius:20px;padding:32px 24px;max-width:400px;width:100%;position:relative;overflow:hidden}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)}
@@ -33,13 +40,15 @@
   .card-title{font-size:22px;font-weight:700;margin-bottom:12px;line-height:1.3}
   .card-body{font-size:15px;line-height:1.7;color:rgba(255,255,255,0.8);margin-bottom:8px}
   .card-cta{font-size:14px;color:#D4AF37;font-weight:600;font-style:italic;margin-top:16px}
-  
-  /* XP Popup */
+  .card-director{font-size:13px;color:rgba(212,175,55,0.7);margin-top:12px;padding-top:12px;border-top:1px solid rgba(212,175,55,0.15);display:flex;align-items:flex-start;gap:6px}
+  .card-director .icon{flex-shrink:0}
+
+  /* === XP POPUP === */
   .xp-popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:48px;font-weight:900;color:#D4AF37;text-shadow:0 0 30px rgba(212,175,55,0.5);pointer-events:none;z-index:100;opacity:0;transition:none}
   .xp-popup.show{animation:xpBurst 0.8s cubic-bezier(0.4,0,0.2,1) forwards}
   @keyframes xpBurst{0%{transform:translate(-50%,-50%) scale(0);opacity:0}30%{transform:translate(-50%,-50%) scale(1.3);opacity:1}60%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{transform:translate(-50%,-70%) scale(0.8);opacity:0}}
-  
-  /* Buttons */
+
+  /* === BUTTONS === */
   .actions{padding:20px;display:flex;gap:12px;max-width:400px;width:100%;margin:0 auto}
   .btn{flex:1;padding:16px 8px;border:none;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;text-transform:uppercase;letter-spacing:1px;transition:all 0.2s}
   .btn:active{transform:scale(0.95)}
@@ -49,80 +58,301 @@
   .btn-save:hover{background:rgba(212,175,55,0.1)}
   .btn-skip{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.4)}
   .btn-skip:hover{background:rgba(255,255,255,0.08)}
-  
-  /* Card transition */
+
+  /* === CARD TRANSITIONS === */
   .card.exit{animation:cardExit 0.3s ease-in forwards}
   .card.enter{animation:cardEnter 0.3s ease-out forwards}
   @keyframes cardExit{to{transform:translateX(-100px);opacity:0}}
   @keyframes cardEnter{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
-  
-  /* Footer */
+
+  /* === FOOTER === */
   .footer{text-align:center;padding:16px;font-size:11px;color:rgba(255,255,255,0.3);border-top:1px solid rgba(255,255,255,0.05)}
   .footer a{color:rgba(212,175,55,0.5);text-decoration:none}
-  
-  /* Empty state */
+
+  /* === EMPTY STATE === */
   .empty{text-align:center;padding:40px 20px}
   .empty .icon{font-size:64px;margin-bottom:16px}
   .empty h2{color:#D4AF37;margin-bottom:8px}
   .empty p{color:rgba(255,255,255,0.5);font-size:14px}
+
+  /* === INTAKE WIZARD === */
+  .wizard{flex:1;display:flex;align-items:center;justify-content:center;padding:20px}
+  .wizard-card{background:linear-gradient(145deg,#1a1a1a,#0d0d0d);border:1px solid rgba(212,175,55,0.3);border-radius:20px;padding:40px 28px;max-width:420px;width:100%;text-align:center;position:relative;overflow:hidden}
+  .wizard-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#D4AF37,transparent)}
+  .wizard-step{display:none}
+  .wizard-step.active{display:block}
+  .wizard-icon{font-size:48px;margin-bottom:16px}
+  .wizard-title{font-size:24px;font-weight:700;color:#D4AF37;margin-bottom:8px}
+  .wizard-subtitle{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:28px;line-height:1.5}
+  .wizard-input{width:100%;padding:16px 20px;background:rgba(255,255,255,0.08);border:1px solid rgba(212,175,55,0.3);border-radius:12px;color:#fff;font-size:16px;text-align:center;outline:none;transition:border-color 0.2s}
+  .wizard-input:focus{border-color:#D4AF37}
+  .wizard-input::placeholder{color:rgba(255,255,255,0.3)}
+  .wizard-btn{display:inline-block;padding:16px 48px;background:linear-gradient(135deg,#D4AF37,#B8941F);color:#000;font-weight:800;font-size:16px;border:none;border-radius:14px;cursor:pointer;margin-top:24px;text-transform:uppercase;letter-spacing:1px;transition:all 0.2s}
+  .wizard-btn:active{transform:scale(0.95)}
+  .wizard-btn:disabled{opacity:0.4;cursor:not-allowed}
+
+  /* Category Grid */
+  .category-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;text-align:left}
+  .category-option{padding:14px 16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;transition:all 0.2s;font-size:14px;display:flex;align-items:center;gap:10px}
+  .category-option:hover{border-color:rgba(212,175,55,0.4);background:rgba(212,175,55,0.05)}
+  .category-option.selected{border-color:#D4AF37;background:rgba(212,175,55,0.15);color:#D4AF37}
+  .category-option .cat-icon{font-size:18px;flex-shrink:0}
+  .category-option .cat-label{font-weight:600}
+
+  /* Progress dots */
+  .wizard-progress{display:flex;gap:8px;justify-content:center;margin-bottom:24px}
+  .wizard-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s}
+  .wizard-dot.active{background:#D4AF37;width:24px;border-radius:4px}
+  .wizard-dot.done{background:rgba(212,175,55,0.5)}
+
+  /* === PROFILE SCREEN === */
+  .profile-container{flex:1;padding:20px;max-width:420px;width:100%;margin:0 auto}
+  .profile-header{text-align:center;padding:20px 0 30px}
+  .profile-avatar{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#B8941F);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 16px;border:3px solid rgba(212,175,55,0.5)}
+  .profile-name{font-size:24px;font-weight:700;color:#D4AF37}
+  .profile-category{font-size:14px;color:rgba(255,255,255,0.5);margin-top:4px}
+  .profile-joined{font-size:12px;color:rgba(255,255,255,0.3);margin-top:4px}
+  .stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:20px 0}
+  .stat-card{background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.15);border-radius:14px;padding:16px;text-align:center}
+  .stat-value{font-size:28px;font-weight:800;color:#D4AF37}
+  .stat-label{font-size:11px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+  .profile-section{margin-top:24px}
+  .profile-section-title{font-size:13px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+  .streak-calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-day{width:100%;aspect-ratio:1;border-radius:4px;background:rgba(255,255,255,0.05)}
+  .cal-day.active{background:rgba(212,175,55,0.4)}
+  .cal-day.today{border:1px solid #D4AF37}
+  .back-btn{display:block;width:100%;padding:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.2);border-radius:14px;color:#D4AF37;font-weight:700;font-size:15px;cursor:pointer;text-align:center;margin-top:24px;transition:all 0.2s}
+  .back-btn:hover{background:rgba(212,175,55,0.1)}
+  .reset-btn{display:block;width:100%;padding:12px;background:none;border:1px solid rgba(255,80,80,0.2);border-radius:14px;color:rgba(255,80,80,0.5);font-size:12px;cursor:pointer;text-align:center;margin-top:12px;transition:all 0.2s}
+  .reset-btn:hover{border-color:rgba(255,80,80,0.5);color:rgba(255,80,80,0.8)}
+
+  /* Level up animation */
+  .level-up{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.3s}
+  .level-up.show{opacity:1;pointer-events:auto}
+  .level-up-content{text-align:center;animation:levelPop 0.5s ease-out}
+  .level-up-icon{font-size:64px;margin-bottom:12px}
+  .level-up-text{font-size:32px;font-weight:900;color:#D4AF37;text-shadow:0 0 40px rgba(212,175,55,0.5)}
+  .level-up-sub{font-size:16px;color:rgba(255,255,255,0.6);margin-top:8px}
+  @keyframes levelPop{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.1)}100%{transform:scale(1);opacity:1}}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="logo"><span>📐</span> THE ANGLE</div>
-  <div class="streak-badge"><span class="fire">🔥</span> <span id="streakCount">0</span> day streak</div>
-</div>
-
-<div class="xp-bar-container">
-  <div class="xp-label">
-    <span>LEVEL <span id="levelNum">1</span></span>
-    <span><span id="xpCurrent">0</span> / <span id="xpNeeded">100</span> XP</span>
+<!-- ========== SCREEN: INTAKE WIZARD ========== -->
+<div class="screen" id="screen-wizard">
+  <div class="header">
+    <div class="logo"><span>📐</span> THE ANGLE</div>
   </div>
-  <div class="xp-bar"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+  <div class="wizard">
+    <div class="wizard-card">
+      <div class="wizard-progress">
+        <div class="wizard-dot active" id="dot-0"></div>
+        <div class="wizard-dot" id="dot-1"></div>
+        <div class="wizard-dot" id="dot-2"></div>
+      </div>
+
+      <!-- Step 1: Name -->
+      <div class="wizard-step active" id="wiz-step-0">
+        <div class="wizard-icon">📐</div>
+        <div class="wizard-title">Welcome to The Angle.</div>
+        <div class="wizard-subtitle">Social choreography starts with knowing who's in the room.<br>What should we call you?</div>
+        <input type="text" class="wizard-input" id="wizName" placeholder="Your first name" maxlength="20" autocomplete="off">
+        <br>
+        <button class="wizard-btn" id="wizNameBtn" disabled onclick="wizardNext(1)">Continue →</button>
+      </div>
+
+      <!-- Step 2: Category -->
+      <div class="wizard-step" id="wiz-step-1">
+        <div class="wizard-icon">🎯</div>
+        <div class="wizard-title">What's your arena?</div>
+        <div class="wizard-subtitle">Pick the world you operate in. This shapes your daily directives.</div>
+        <div class="category-grid" id="categoryGrid"></div>
+        <button class="wizard-btn" id="wizCatBtn" disabled onclick="wizardNext(2)">Lock it in →</button>
+      </div>
+
+      <!-- Step 3: Confirmation -->
+      <div class="wizard-step" id="wiz-step-2">
+        <div class="wizard-icon">🔥</div>
+        <div class="wizard-title" id="wizConfirmTitle">You're in.</div>
+        <div class="wizard-subtitle" id="wizConfirmSub">The room just shifted in your favor. Your personalized Z-Logic engine is loaded.</div>
+        <div style="background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.2);border-radius:14px;padding:20px;margin:16px 0;text-align:left">
+          <div style="font-size:13px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Your Profile</div>
+          <div style="font-size:18px;font-weight:700;color:#D4AF37" id="wizProfileName"></div>
+          <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:4px" id="wizProfileCat"></div>
+        </div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.4);margin-top:12px">One card. One move. Every day.<br>Your streak is your proof.</div>
+        <button class="wizard-btn" onclick="finishWizard()">⚡ Launch Z-Logic</button>
+      </div>
+    </div>
+  </div>
+  <div class="footer">© 2026 MindWell Solution Group LLC</div>
 </div>
 
-<div class="card-area" id="cardArea">
-  <!-- Card injected by JS -->
+<!-- ========== SCREEN: DAILY LOOP ========== -->
+<div class="screen" id="screen-daily">
+  <div class="header">
+    <div class="logo"><span>📐</span> THE ANGLE</div>
+    <div class="header-right">
+      <div class="streak-badge"><span class="fire">🔥</span> <span id="streakCount">0</span></div>
+      <div class="profile-btn" onclick="showProfile()">👤</div>
+    </div>
+  </div>
+  <div class="xp-bar-container">
+    <div class="xp-label">
+      <span>LEVEL <span id="levelNum">1</span></span>
+      <span><span id="xpCurrent">0</span> / <span id="xpNeeded">100</span> XP</span>
+    </div>
+    <div class="xp-bar"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+  </div>
+  <div class="card-area" id="cardArea"></div>
+  <div class="actions" id="actions">
+    <button class="btn btn-act" onclick="respond('act')">⚡ Act</button>
+    <button class="btn btn-save" onclick="respond('save')">💾 Save</button>
+    <button class="btn btn-skip" onclick="respond('skip')">→ Skip</button>
+  </div>
+  <div class="xp-popup" id="xpPopup">XP +10</div>
+  <div class="footer">
+    <a href="index.html">← Home</a> &nbsp;|&nbsp; © 2026 MindWell Solution Group LLC
+  </div>
 </div>
 
-<div class="actions" id="actions">
-  <button class="btn btn-act" onclick="respond('act')">⚡ Act</button>
-  <button class="btn btn-save" onclick="respond('save')">💾 Save</button>
-  <button class="btn btn-skip" onclick="respond('skip')">→ Skip</button>
+<!-- ========== SCREEN: PROFILE ========== -->
+<div class="screen" id="screen-profile">
+  <div class="header">
+    <div class="logo"><span>📐</span> THE ANGLE</div>
+  </div>
+  <div class="profile-container">
+    <div class="profile-header">
+      <div class="profile-avatar" id="profileAvatar">📐</div>
+      <div class="profile-name" id="profileName"></div>
+      <div class="profile-category" id="profileCategory"></div>
+      <div class="profile-joined" id="profileJoined"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="statLevel">1</div>
+        <div class="stat-label">Level</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statXP">0</div>
+        <div class="stat-label">Total XP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statStreak">0</div>
+        <div class="stat-label">Streak</div>
+      </div>
+    </div>
+    <div class="stats-grid" style="grid-template-columns:1fr 1fr">
+      <div class="stat-card">
+        <div class="stat-value" id="statActs">0</div>
+        <div class="stat-label">Acts</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statSaves">0</div>
+        <div class="stat-label">Saves</div>
+      </div>
+    </div>
+    <div class="profile-section">
+      <div class="profile-section-title">Last 28 Days</div>
+      <div class="streak-calendar" id="streakCalendar"></div>
+    </div>
+    <button class="back-btn" onclick="showDaily()">← Back to Daily Loop</button>
+    <button class="reset-btn" onclick="resetProfile()">Reset Profile</button>
+  </div>
+  <div class="footer">© 2026 MindWell Solution Group LLC</div>
 </div>
 
-<div class="xp-popup" id="xpPopup">XP +10</div>
-
-<div class="footer">
-  <a href="index.html">← Back to Home</a> &nbsp;|&nbsp; © 2026 MindWell Solution Group LLC
+<!-- ========== LEVEL UP OVERLAY ========== -->
+<div class="level-up" id="levelUpOverlay" onclick="this.classList.remove('show')">
+  <div class="level-up-content">
+    <div class="level-up-icon">⚡</div>
+    <div class="level-up-text" id="levelUpText">LEVEL 2</div>
+    <div class="level-up-sub">The room feels different now.</div>
+  </div>
 </div>
 
 <script>
-// === DAILY CARDS: THE ANGLE — Z-Logic Social Choreography ===
+// ===================================================================
+// THE ANGLE — Z-Logic Social Choreography Engine
+// © 2026 MindWell Solution Group LLC
+// ===================================================================
+
+// === CATEGORIES ===
+const CATEGORIES = [
+  {id:"real-estate",  label:"Real Estate",       icon:"🏠"},
+  {id:"consulting",   label:"Consulting",        icon:"💼"},
+  {id:"coaching",     label:"Coaching",           icon:"🎯"},
+  {id:"financial",    label:"Financial Services", icon:"📊"},
+  {id:"insurance",    label:"Insurance",          icon:"🛡️"},
+  {id:"creative",     label:"Creative / Freelance",icon:"🎨"},
+  {id:"legal",        label:"Legal",              icon:"⚖️"},
+  {id:"healthcare",   label:"Healthcare",         icon:"🩺"},
+  {id:"sales",        label:"Sales",              icon:"🤝"},
+  {id:"founder",      label:"Startup / Founder",  icon:"🚀"}
+];
+
+// === DIRECTOR CONTEXTS (personalized CTAs per category) ===
+const DIRECTOR = {
+  "real-estate":  ["at your next showing","during your listing pitch","with your next buyer","at the closing table","in your open house","when staging the walkthrough"],
+  "consulting":   ["in your strategy session","during the stakeholder call","with your next client","at the board presentation","during discovery","when scoping the engagement"],
+  "coaching":     ["in your next coaching call","when your client pushes back","during the breakthrough moment","in your group session","when setting accountability","during intake conversations"],
+  "financial":    ["in your portfolio review","during your client meeting","when presenting projections","at the prospect dinner","when handling objections","during annual planning"],
+  "insurance":    ["in your policy review","during your cold call","with your next renewal","at the networking event","when handling claims concerns","during your referral ask"],
+  "creative":     ["in your client pitch","during the creative review","when presenting concepts","at the project kickoff","when negotiating scope","during your portfolio presentation"],
+  "legal":        ["in your client consultation","during depositions","when presenting to the jury","at mediation","during contract negotiations","when advising on strategy"],
+  "healthcare":   ["in your patient consultation","during your team huddle","when delivering difficult news","at the wellness check","during staff meetings","when building patient trust"],
+  "sales":        ["in your discovery call","during the demo","when handling the objection","at the follow-up","during the close","when building the pipeline"],
+  "founder":      ["in your investor pitch","during the team standup","when pivoting strategy","at the customer call","during your board update","when hiring conversations"]
+};
+
+// === 30-DAY CONTENT MATRIX ===
 const CARDS = [
   {title:"The Mirror Move",body:"When someone shares a strong opinion today, don't counter it. Mirror their energy first: 'I can see why you'd feel that way.' Then pivot. Watch how the conversation shifts when they feel heard before challenged.",cta:"Try this in your next conversation today."},
-  {title:"The 3-Second Pause",body:"Before responding to any emotionally charged message today, count to 3. Not to calm down—to let the other person wonder. Silence is the most underrated power move in communication.",cta:"Use this pause at least twice today."},
-  {title:"The Name Drop",body:"Use someone's first name 3 times in a conversation today. Not in a salesy way—in a warmth way. 'That's a great point, Sarah.' People are hardwired to lean in when they hear their name.",cta:"Pick one conversation and make it personal."},
-  {title:"The Exit Line",body:"End one conversation today BEFORE it peaks. Leave them wanting more. 'I'd love to keep going but I've got to run—let's pick this up.' Scarcity creates value in relationships too.",cta:"Exit one conversation at its high point."},
+  {title:"The 3-Second Pause",body:"Before responding to any emotionally charged message today, count to 3. Not to calm down — to let the other person wonder. Silence is the most underrated power move in communication.",cta:"Use this pause at least twice today."},
+  {title:"The Name Drop",body:"Use someone's first name 3 times in a conversation today. Not in a salesy way — in a warmth way. 'That's a great point, Sarah.' People are hardwired to lean in when they hear their name.",cta:"Pick one conversation and make it personal."},
+  {title:"The Exit Line",body:"End one conversation today BEFORE it peaks. Leave them wanting more. 'I'd love to keep going but I've got to run — let's pick this up.' Scarcity creates value in relationships too.",cta:"Exit one conversation at its high point."},
   {title:"The Curiosity Hook",body:"Ask someone a question today that they've NEVER been asked: 'What's the most interesting thing you've changed your mind about recently?' Novel questions create memorable interactions.",cta:"Deploy this question and watch what happens."},
-  {title:"The Generous Intro",body:"Connect two people who don't know each other today. The introduction email/text takes 30 seconds but positions you as a hub, not a spoke. Hubs accumulate social capital exponentially.",cta:"Make one introduction before end of day."},
-  {title:"The Frame Flip",body:"Take a complaint you hear today and reframe it as an opportunity. 'So what you're really saying is there's a gap in the market for...' Reframers are seen as visionaries, not just listeners.",cta:"Flip one negative into a positive out loud."},
-  {title:"The Callback",body:"Reference something specific someone told you last time you spoke. 'You mentioned your daughter's recital—how did it go?' This signals 'I was actually listening' louder than any words.",cta:"Send one callback message to someone today."},
+  {title:"The Generous Intro",body:"Connect two people who don't know each other today. The introduction takes 30 seconds but positions you as a hub, not a spoke. Hubs accumulate social capital exponentially.",cta:"Make one introduction before end of day."},
+  {title:"The Frame Flip",body:"Take a complaint you hear today and reframe it as an opportunity. 'So what you're really saying is there's a gap for...' Reframers are seen as visionaries, not just listeners.",cta:"Flip one negative into a positive out loud."},
+  {title:"The Callback",body:"Reference something specific someone told you last time you spoke. 'You mentioned your daughter's recital — how did it go?' This signals 'I was actually listening' louder than any words.",cta:"Send one callback message to someone today."},
   {title:"The Strategic Compliment",body:"Compliment someone on their PROCESS, not their result. 'I love how you structured that presentation' hits different than 'nice job.' Process-praise builds deeper respect.",cta:"Give one process-focused compliment today."},
   {title:"The Soft No",body:"Decline one request today without using the word 'no.' Try: 'I'm fully committed this week, but I could look at this next Tuesday.' Boundaries delivered with alternatives build more respect than compliance.",cta:"Practice one soft no today."},
   {title:"The Power Question",body:"In your next meeting, ask: 'What would need to be true for this to work?' This single question reframes debate into collaborative problem-solving and positions you as the strategist in the room.",cta:"Ask this in your next group discussion."},
   {title:"The 10-Minute Favor",body:"Do one unsolicited favor today that takes you less than 10 minutes. Forward an article, make an intro, leave a recommendation. Small, unexpected generosity compounds into social capital.",cta:"Complete one micro-favor before 5pm."},
-  {title:"The Vulnerability Play",body:"Share one genuine struggle or lesson-learned today. Not for sympathy—for connection. 'I totally botched a pitch last month and here's what I learned.' Vulnerability, when strategic, is magnetic.",cta:"Share one real lesson with someone today."},
-  {title:"The Active Listen",body:"In your next conversation, don't formulate your response while they talk. Instead, when they finish, say: 'Let me make sure I got that right...' and paraphrase. This is the rarest skill in modern communication.",cta:"Paraphrase someone's point back to them today."}
+  {title:"The Vulnerability Play",body:"Share one genuine struggle or lesson-learned today. Not for sympathy — for connection. 'I totally botched a pitch last month and here's what I learned.' Vulnerability, when strategic, is magnetic.",cta:"Share one real lesson with someone today."},
+  {title:"The Active Listen",body:"In your next conversation, don't formulate your response while they talk. When they finish, say: 'Let me make sure I got that right...' and paraphrase. This is the rarest skill in modern communication.",cta:"Paraphrase someone's point back to them today."},
+  {title:"The First Five",body:"The first 5 seconds of any interaction set the frame. Today, lead with energy — not words. Smile before you speak. Stand before you greet. Movement signals confidence before language can.",cta:"Win the first 5 seconds of your next interaction."},
+  {title:"The Anchor Story",body:"Prepare one 60-second story that demonstrates your values without stating them. 'Last month, a client called panicking at midnight. Here's what I did...' Stories sell. Facts tell.",cta:"Craft and deploy your anchor story once today."},
+  {title:"The Status Reset",body:"If you feel the power dynamic slipping, reset it. Lean back. Slow your speech by 20%. Lower your volume by 10%. The person who controls their pace controls the room. Urgency is the enemy of status.",cta:"Slow down in one high-stakes conversation today."},
+  {title:"The Room Read",body:"Before you speak in any group setting today, take 5 seconds to read the room. Who's engaged? Who's checked out? Who's the real decision maker? Intelligence precedes influence.",cta:"Read one room before you contribute to it."},
+  {title:"The Value Stack",body:"Instead of pitching yourself today, stack value first. Give insight, a referral, or a shortcut — THEN mention what you do. People buy from those who give before they ask.",cta:"Lead with value in your next interaction."},
+  {title:"The Bridge Statement",body:"When a conversation stalls, use: 'That reminds me of something interesting...' This bridge statement redirects without awkwardness and keeps you in control of the narrative arc.",cta:"Use one bridge statement to rescue a stalling conversation."},
+  {title:"The Contrast Principle",body:"When presenting options today, always give the extreme option first. '$50,000 package' before '$5,000 starter.' The second option always feels more reasonable by contrast. This is psychology, not manipulation — it's framing.",cta:"Use contrast framing in your next proposal or recommendation."},
+  {title:"The Reciprocity Trigger",body:"Buy someone a coffee, send a handwritten note, or share an exclusive piece of intel today. Reciprocity isn't a theory — it's a hardwired human response. When you give first, the return is almost guaranteed.",cta:"Trigger reciprocity with one generous act today."},
+  {title:"The Micro-Agreement",body:"Before making your big ask, get three small 'yeses' first. 'Would you agree that timing matters?' 'Yes.' 'And that the market is shifting?' 'Yes.' Micro-agreements build momentum toward the macro-yes.",cta:"Stack three small yeses before your next big ask."},
+  {title:"The Social Proof Drop",body:"Casually mention a relevant success without bragging: 'I was just working with someone in a similar situation and they found...' Third-party proof is 10x more persuasive than first-person claims.",cta:"Drop one social proof reference in conversation today."},
+  {title:"The Patience Play",body:"Today, when you want to follow up — don't. Wait 24 hours longer than feels comfortable. Desperation repels. Patience signals abundance. The person who can wait the longest often wins the biggest.",cta:"Practice strategic patience on one pending follow-up."},
+  {title:"The Authority Lean",body:"Share one contrarian opinion today — backed by logic. 'Everyone thinks X, but here's what the data actually shows...' Contrarians who can defend their position are perceived as leaders, not followers.",cta:"Express one well-reasoned contrarian take today."},
+  {title:"The Emotional Mirror",body:"Match the emotional frequency of the person you're speaking to before you redirect. If they're frustrated, acknowledge frustration. If they're excited, match the energy. Resonance precedes influence.",cta:"Mirror someone's emotional state before steering the conversation."},
+  {title:"The Tactical Pause",body:"After someone asks you a question today, pause for 3 full seconds before answering. This does three things: shows you're thinking deeply, creates anticipation, and gives you better answers. Rushed responses signal low status.",cta:"Take a 3-second pause before your next important answer."},
+  {title:"The Future Pace",body:"Paint a vivid picture of the future for someone today: 'Imagine six months from now, you're looking back at this moment and thinking — that's when everything changed.' Future pacing moves people to action because they've already emotionally lived the outcome.",cta:"Future pace one person through a decision today."},
+  {title:"The Abundance Signal",body:"Turn down one opportunity today — even a good one. Say: 'I appreciate it, but I'm at capacity right now.' Nothing communicates value louder than selective availability. Scarcity of attention is the new status symbol.",cta:"Decline one thing to signal abundance today."}
 ];
 
-// === STATE ===
-let state = JSON.parse(localStorage.getItem('angle_state') || 'null') || {
-  xp: 0, level: 1, streak: 0, lastDate: null, acted: [], saved: [], cardIndex: 0
+// === STATE MANAGEMENT ===
+const STORAGE_KEY = 'angle_state';
+const PROFILE_KEY = 'angle_profile';
+
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null') || {
+  xp:0, level:1, streak:0, lastDate:null,
+  acted:[], saved:[], history:[]
 };
 
-function saveState(){ localStorage.setItem('angle_state', JSON.stringify(state)); }
+let profile = JSON.parse(localStorage.getItem(PROFILE_KEY) || 'null');
+
+function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function saveProfile(){ localStorage.setItem(PROFILE_KEY, JSON.stringify(profile)); }
 
 // === STREAK CHECK ===
 function checkStreak(){
@@ -132,10 +362,82 @@ function checkStreak(){
     const diff = Math.floor((new Date(today) - last) / 86400000);
     if(diff > 1) state.streak = 0;
   }
+  saveState();
 }
-checkStreak();
 
-// === RENDER ===
+// === SCREEN MANAGEMENT ===
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+}
+
+// === WIZARD ===
+let wizStep = 0;
+let selectedCategory = null;
+
+function initWizard(){
+  // Build category grid
+  const grid = document.getElementById('categoryGrid');
+  grid.innerHTML = CATEGORIES.map(c => `
+    <div class="category-option" data-id="${c.id}" onclick="selectCategory('${c.id}')">
+      <span class="cat-icon">${c.icon}</span>
+      <span class="cat-label">${c.label}</span>
+    </div>
+  `).join('');
+
+  // Name input handler
+  const nameInput = document.getElementById('wizName');
+  const nameBtn = document.getElementById('wizNameBtn');
+  nameInput.addEventListener('input', () => {
+    nameBtn.disabled = nameInput.value.trim().length < 1;
+  });
+  nameInput.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' && !nameBtn.disabled) wizardNext(1);
+  });
+}
+
+function selectCategory(id){
+  selectedCategory = id;
+  document.querySelectorAll('.category-option').forEach(el => {
+    el.classList.toggle('selected', el.dataset.id === id);
+  });
+  document.getElementById('wizCatBtn').disabled = false;
+}
+
+function wizardNext(step){
+  wizStep = step;
+  document.querySelectorAll('.wizard-step').forEach((s,i) => {
+    s.classList.toggle('active', i === step);
+  });
+  document.querySelectorAll('.wizard-dot').forEach((d,i) => {
+    d.classList.toggle('active', i === step);
+    d.classList.toggle('done', i < step);
+  });
+
+  if(step === 2){
+    const name = document.getElementById('wizName').value.trim();
+    const cat = CATEGORIES.find(c => c.id === selectedCategory);
+    document.getElementById('wizConfirmTitle').textContent = `${name}, you're in.`;
+    document.getElementById('wizProfileName').textContent = name;
+    document.getElementById('wizProfileCat').textContent = cat.icon + ' ' + cat.label;
+  }
+}
+
+function finishWizard(){
+  const name = document.getElementById('wizName').value.trim();
+  const cat = CATEGORIES.find(c => c.id === selectedCategory);
+  profile = {
+    name: name,
+    category: selectedCategory,
+    categoryLabel: cat.label,
+    categoryIcon: cat.icon,
+    joinDate: new Date().toISOString()
+  };
+  saveProfile();
+  startDaily();
+}
+
+// === DAILY LOOP ===
 function getToday(){ return new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}); }
 
 function getDailyCard(){
@@ -143,11 +445,20 @@ function getDailyCard(){
   return CARDS[dayOfYear % CARDS.length];
 }
 
+function getDirectorLine(){
+  if(!profile || !profile.category) return null;
+  const contexts = DIRECTOR[profile.category];
+  if(!contexts) return null;
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(),0,0)) / 86400000);
+  const ctx = contexts[dayOfYear % contexts.length];
+  return `🎯 ${profile.name}, deploy this ${ctx}.`;
+}
+
 function renderCard(){
   const card = getDailyCard();
   const today = new Date().toDateString();
   const alreadyDone = state.acted.includes(today) || state.saved.includes(today);
-  
+
   if(alreadyDone){
     document.getElementById('cardArea').innerHTML = `
       <div class="empty">
@@ -159,7 +470,11 @@ function renderCard(){
     document.getElementById('actions').style.display = 'none';
     return;
   }
-  
+
+  const directorLine = getDirectorLine();
+  const directorHTML = directorLine ?
+    `<div class="card-director"><span class="icon">📐</span>${directorLine}</div>` : '';
+
   document.getElementById('cardArea').innerHTML = `
     <div class="card enter" id="activeCard">
       <div class="card-label">📐 Today's Angle</div>
@@ -167,6 +482,7 @@ function renderCard(){
       <h2 class="card-title">${card.title}</h2>
       <p class="card-body">${card.body}</p>
       <p class="card-cta">${card.cta}</p>
+      ${directorHTML}
     </div>`;
   document.getElementById('actions').style.display = 'flex';
 }
@@ -175,10 +491,9 @@ function updateUI(){
   document.getElementById('streakCount').textContent = state.streak;
   document.getElementById('levelNum').textContent = state.level;
   const xpInLevel = state.xp % 100;
-  const needed = 100;
   document.getElementById('xpCurrent').textContent = xpInLevel;
-  document.getElementById('xpNeeded').textContent = needed;
-  document.getElementById('xpFill').style.width = (xpInLevel / needed * 100) + '%';
+  document.getElementById('xpNeeded').textContent = 100;
+  document.getElementById('xpFill').style.width = (xpInLevel / 100 * 100) + '%';
 }
 
 function showXP(amount){
@@ -189,32 +504,44 @@ function showXP(amount){
   popup.classList.add('show');
 }
 
-// === ACTIONS ===
+function showLevelUp(newLevel){
+  const overlay = document.getElementById('levelUpOverlay');
+  document.getElementById('levelUpText').textContent = `LEVEL ${newLevel}`;
+  overlay.classList.add('show');
+  setTimeout(() => overlay.classList.remove('show'), 2500);
+}
+
 function respond(action){
   const today = new Date().toDateString();
   const card = document.getElementById('activeCard');
-  
+  const prevLevel = state.level;
+
   if(action === 'act'){
     state.xp += 10;
     state.acted.push(today);
     state.streak++;
     state.lastDate = today;
+    state.history.push({date:today, action:'act'});
     showXP(10);
   } else if(action === 'save'){
     state.xp += 5;
     state.saved.push(today);
     state.streak++;
     state.lastDate = today;
+    state.history.push({date:today, action:'save'});
     showXP(5);
   } else {
     state.lastDate = today;
+    state.history.push({date:today, action:'skip'});
   }
-  
-  // Level up check
+
   state.level = Math.floor(state.xp / 100) + 1;
-  
   saveState();
-  
+
+  if(state.level > prevLevel){
+    setTimeout(() => showLevelUp(state.level), 400);
+  }
+
   if(card) card.classList.add('exit');
   setTimeout(() => {
     renderCard();
@@ -222,11 +549,75 @@ function respond(action){
   }, 350);
 }
 
-// === INIT ===
-renderCard();
-updateUI();
+// === PROFILE ===
+function showProfile(){
+  showScreen('profile');
+  renderProfile();
+}
 
-// === KILL ZOMBIE SERVICE WORKERS ===
+function showDaily(){
+  showScreen('daily');
+}
+
+function renderProfile(){
+  if(!profile) return;
+  document.getElementById('profileAvatar').textContent = profile.categoryIcon || '📐';
+  document.getElementById('profileName').textContent = profile.name;
+  document.getElementById('profileCategory').textContent = profile.categoryLabel;
+  const joinDate = new Date(profile.joinDate);
+  document.getElementById('profileJoined').textContent = 'Joined ' + joinDate.toLocaleDateString('en-US',{month:'long', day:'numeric', year:'numeric'});
+
+  document.getElementById('statLevel').textContent = state.level;
+  document.getElementById('statXP').textContent = state.xp;
+  document.getElementById('statStreak').textContent = state.streak;
+  document.getElementById('statActs').textContent = state.acted.length;
+  document.getElementById('statSaves').textContent = state.saved.length;
+
+  // Build 28-day calendar
+  const cal = document.getElementById('streakCalendar');
+  const today = new Date();
+  const allDates = [...state.acted, ...state.saved];
+  let html = '';
+  for(let i = 27; i >= 0; i--){
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const ds = d.toDateString();
+    const isActive = allDates.includes(ds);
+    const isToday = i === 0;
+    html += `<div class="cal-day${isActive?' active':''}${isToday?' today':''}"></div>`;
+  }
+  cal.innerHTML = html;
+}
+
+function resetProfile(){
+  if(confirm('This will erase your profile, XP, and streaks. Are you sure?')){
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(PROFILE_KEY);
+    location.reload();
+  }
+}
+
+// === START DAILY ===
+function startDaily(){
+  checkStreak();
+  showScreen('daily');
+  renderCard();
+  updateUI();
+}
+
+// === INIT ===
+function init(){
+  if(!profile){
+    initWizard();
+    showScreen('wizard');
+  } else {
+    startDaily();
+  }
+}
+
+init();
+
+// Kill zombie service workers
 if('serviceWorker' in navigator){
   navigator.serviceWorker.getRegistrations().then(r => r.forEach(w => w.unregister()));
 }

@@ -7,6 +7,10 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
     <link rel="apple-touch-icon" href="/icon-192.png">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="The Angle">
     <style>
         body { background-color: #000; color: #fff; font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 50px 20px; }
         .logo { font-size: 80px; margin-bottom: 20px; color: #D4AF37; }
@@ -30,6 +34,10 @@
     <div class="footer">
         &copy; 2026 THIRD ACT PRODUCTIONS | DATA SPECIALIST GROUP LLC
     </div>
-    <script src="app-portal.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
 </body>
 </html>

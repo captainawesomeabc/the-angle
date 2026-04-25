@@ -35,9 +35,10 @@
 
     <div class="footer">
         &copy; 2026 MindWell Solution Group LLC<br>
-        <a href="/members.html" class="member-login">Member Login →</a>
+        <a href="/members.html" class="member-login">Member Login &rarr;</a>
     </div>
     <script>
+        // KILL ALL SERVICE WORKERS - no new registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for (let registration of registrations) { registration.unregister(); }
@@ -45,7 +46,6 @@
             caches.keys().then(function(names) {
                 for (let name of names) caches.delete(name);
             });
-            navigator.serviceWorker.register('/sw.js?v=2');
         }
     </script>
 </body>

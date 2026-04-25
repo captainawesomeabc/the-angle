@@ -19,25 +19,31 @@
         .cta-button:hover { background-color: #E5C040; }
         .divider { width: 60px; height: 2px; background: #D4AF37; margin: 30px auto; }
         .footer { margin-top: 80px; font-size: 0.8rem; color: #444; }
+        .footer a { color: rgba(212,175,55,0.6); text-decoration: none; }
     </style>
 </head>
 <body>
     <div class="logo">📐</div>
     <div class="welcome-badge">✦ Inner Circle Member ✦</div>
     <h1>Welcome to the Hangar.</h1>
-    <p>You're in. The room just shifted in your favor. Below is your direct line to the Z-Logic AI — your personal social choreography engine.</p>
+    <p>You're in. The room just shifted in your favor. Below is your direct line to the Z-Logic Daily Loop — your personal social choreography engine.</p>
 
     <div class="member-card">
-        <h2>🧠 Z-Logic AI Agent</h2>
-        <p style="color: #aaa;">Your daily strategic edge. Real-time social intelligence, pattern recognition, and high-stakes playbook — powered by Z-Logic.</p>
+        <h2>🧠 Z-Logic Daily Loop</h2>
+        <p style="color: #aaa;">Your daily strategic edge. One card. One move. Act on it, save it, or skip it — but show up every day. Your streak is your proof.</p>
         <div class="divider"></div>
-        <a href="https://tasklet.ai/agent/michael-berman-zlogic" class="cta-button" id="agent-link">LAUNCH Z-LOGIC</a>
-        <p style="font-size: 0.85rem; color: #555; margin-top: 20px;">Link activates with your subscription. Check back daily for fresh intelligence.</p>
+        <a href="app.html" class="cta-button">LAUNCH Z-LOGIC</a>
+        <p style="font-size: 0.85rem; color: #555; margin-top: 20px;">New card every day. Build your streak. Level up your social game.</p>
     </div>
 
     <div class="footer">
+        <a href="index.html">← Back to Home</a><br><br>
         &copy; 2026 MindWell Solution Group LLC<br>
         <span style="color: #D4AF37;">Member Access Only</span> — Do not share this link.
     </div>
+
+    <script>
+    if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(r=>r.forEach(w=>w.unregister()));}
+    </script>
 </body>
 </html>

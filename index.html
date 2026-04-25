@@ -32,11 +32,17 @@
     <a href="https://buy.stripe.com/00weVdgeQeME9jIfN57g400" class="cta-button">JOIN THE INNER CIRCLE</a>
 
     <div class="footer">
-        &copy; 2026 THIRD ACT PRODUCTIONS | DATA SPECIALIST GROUP LLC
+        &copy; 2026 MindWell Solution Group LLC
     </div>
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let registration of registrations) { registration.unregister(); }
+            });
+            caches.keys().then(function(names) {
+                for (let name of names) caches.delete(name);
+            });
+            navigator.serviceWorker.register('/sw.js?v=2');
         }
     </script>
 </body>

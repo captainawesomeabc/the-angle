@@ -16,6 +16,8 @@
         .logo { font-size: 80px; margin-bottom: 20px; color: #D4AF37; }
         h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
         p { font-size: 1.2rem; color: #888; max-width: 600px; margin: 20px auto; line-height: 1.6; }
+        .video-container { max-width: 640px; margin: 30px auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px; }
         .cta-button { display: inline-block; background-color: #D4AF37; color: #000; padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 30px; font-size: 1.2rem; }
         .footer { margin-top: 100px; font-size: 0.8rem; color: #444; }
         .member-login { display: inline-block; margin-top: 15px; color: #D4AF37; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; border-bottom: 1px solid #D4AF37; padding-bottom: 2px; transition: opacity 0.3s; }
@@ -26,7 +28,11 @@
     <div class="logo">📐</div>
     <h1>YOU ALREADY KNOW THIS.</h1>
     <p>Social choreography for the high-stakes entrepreneur. Stop guessing the room. Start directing it with Z-Logic.</p>
-    
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/fEI89MhPVLM?rel=0" title="The Angle" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
     <div class="pricing">
         <h2 style="color: #D4AF37;">Founder's Access: $19.99/mo</h2>
     </div>
@@ -38,7 +44,6 @@
         <a href="/members.html" class="member-login">Member Login &rarr;</a>
     </div>
     <script>
-        // KILL ALL SERVICE WORKERS - no new registration
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for (let registration of registrations) { registration.unregister(); }

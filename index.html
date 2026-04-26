@@ -1,59 +1,303 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE ANGLE | Z-Logic</title>
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
-    <link rel="apple-touch-icon" href="/icon-192.png">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="The Angle">
-    <style>
-        body { background-color: #000; color: #fff; font-family: 'Helvetica Neue', sans-serif; text-align: center; padding: 50px 20px; }
-        .logo { font-size: 80px; margin-bottom: 20px; color: #D4AF37; }
-        h1 { font-size: 2.5rem; letter-spacing: 2px; text-transform: uppercase; }
-        p { font-size: 1.2rem; color: #888; max-width: 600px; margin: 20px auto; line-height: 1.6; }
-        .video-container { max-width: 640px; margin: 30px auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 10px; }
-        .cta-button { display: inline-block; background-color: #D4AF37; color: #000; padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 30px; font-size: 1.2rem; }
-        .trial-badge { display: inline-block; background: linear-gradient(135deg, #D4AF37, #F0D060); color: #000; padding: 8px 20px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 10px; }
-        .footer { margin-top: 100px; font-size: 0.8rem; color: #444; }
-        .member-login { display: inline-block; margin-top: 15px; color: #D4AF37; text-decoration: none; font-size: 0.9rem; letter-spacing: 1px; border-bottom: 1px solid #D4AF37; padding-bottom: 2px; transition: opacity 0.3s; }
-        .member-login:hover { opacity: 0.7; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE ANGLE | Your Daily Revenue Move</title>
+<meta name="description" content="Every morning, one actionable idea to generate revenue for your practice. 60 days of business angles personalized to your field. Free for 5 days.">
+<meta property="og:title" content="The Angle — Your Daily Revenue Move">
+<meta property="og:description" content="Stop guessing. Start directing. One revenue-generating angle every morning, personalized to your business.">
+<meta property="og:image" content="https://theangle.ai/icon-512.png">
+<meta property="og:url" content="https://theangle.ai">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow-x:hidden;line-height:1.6}
+a{text-decoration:none}
+
+/* HERO */
+.hero{text-align:center;padding:60px 20px 40px;max-width:800px;margin:0 auto}
+.hero-icon{font-size:72px;margin-bottom:16px}
+.hero h1{font-size:clamp(32px,6vw,52px);font-weight:900;letter-spacing:-1px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:16px}
+.hero-sub{font-size:clamp(16px,3vw,22px);color:rgba(255,255,255,0.7);max-width:600px;margin:0 auto 32px;line-height:1.5}
+.hero-highlight{color:#FFD700;font-weight:700}
+
+/* VIDEO */
+.video-section{max-width:720px;margin:0 auto 40px;padding:0 20px}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(255,215,0,0.15)}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+
+/* WHAT IS IT */
+.what-section{background:linear-gradient(180deg,rgba(255,215,0,0.03) 0%,transparent 100%);padding:60px 20px;text-align:center}
+.what-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#FFD700;margin-bottom:16px}
+.what-section .desc{font-size:18px;color:rgba(255,255,255,0.8);max-width:650px;margin:0 auto 40px;line-height:1.7}
+.what-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:900px;margin:0 auto}
+.what-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,215,0,0.15);border-radius:16px;padding:32px 24px;text-align:left}
+.what-card .card-emoji{font-size:36px;margin-bottom:12px}
+.what-card h3{font-size:18px;font-weight:700;color:#FFD700;margin-bottom:8px}
+.what-card p{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.6}
+
+/* HOW IT WORKS */
+.how-section{padding:60px 20px;text-align:center}
+.how-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:48px}
+.steps{display:flex;flex-wrap:wrap;justify-content:center;gap:32px;max-width:900px;margin:0 auto}
+.step{flex:1;min-width:240px;max-width:280px;text-align:center}
+.step-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-size:24px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.step p{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.5}
+.step-arrow{font-size:32px;color:#FFD700;align-self:center;display:flex;align-items:center}
+
+/* WHO IT'S FOR */
+.who-section{background:linear-gradient(180deg,transparent,rgba(255,215,0,0.03));padding:60px 20px;text-align:center}
+.who-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#FFD700;margin-bottom:12px}
+.who-section .sub{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:32px}
+.categories{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;max-width:700px;margin:0 auto}
+.cat-pill{background:rgba(255,215,0,0.1);border:1px solid rgba(255,215,0,0.25);border-radius:100px;padding:10px 20px;font-size:14px;font-weight:600;color:#FFD700}
+
+/* SAMPLE CARD */
+.sample-section{padding:60px 20px;text-align:center}
+.sample-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#fff;margin-bottom:12px}
+.sample-section .sub{font-size:16px;color:rgba(255,255,255,0.5);margin-bottom:32px}
+.sample-card{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,165,0,0.04));border:1px solid rgba(255,215,0,0.2);border-radius:20px;padding:36px 28px;max-width:500px;margin:0 auto;text-align:left}
+.sample-label{font-size:12px;text-transform:uppercase;letter-spacing:2px;color:#FFD700;font-weight:700;margin-bottom:4px}
+.sample-date{font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:16px}
+.sample-title{font-size:22px;font-weight:800;margin-bottom:12px}
+.sample-body{font-size:15px;color:rgba(255,255,255,0.75);line-height:1.7;margin-bottom:16px}
+.sample-cta{font-size:14px;font-weight:700;font-style:italic;color:#FFD700;border-top:1px solid rgba(255,215,0,0.2);padding-top:12px}
+.sample-director{font-size:13px;color:rgba(255,215,0,0.5);margin-top:12px}
+
+/* FEATURES */
+.features-section{padding:60px 20px;text-align:center;background:rgba(255,255,255,0.02)}
+.features-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;color:#FFD700;margin-bottom:40px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;max-width:800px;margin:0 auto}
+.feature{padding:20px;text-align:center}
+.feature .feat-icon{font-size:32px;margin-bottom:8px}
+.feature h3{font-size:15px;font-weight:700;margin-bottom:4px}
+.feature p{font-size:13px;color:rgba(255,255,255,0.5)}
+
+/* FAQ */
+.faq-section{padding:60px 20px;max-width:700px;margin:0 auto}
+.faq-section h2{font-size:clamp(24px,4vw,36px);font-weight:800;text-align:center;margin-bottom:40px}
+.faq-item{border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 0}
+.faq-q{font-size:16px;font-weight:700;color:#FFD700;margin-bottom:8px}
+.faq-a{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6}
+
+/* CTA SECTIONS */
+.cta-section{text-align:center;padding:60px 20px}
+.cta-badge{display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-weight:800;font-size:14px;padding:8px 24px;border-radius:100px;letter-spacing:1px;margin-bottom:16px}
+.cta-price{font-size:20px;color:rgba(255,255,255,0.7);margin-bottom:24px}
+.cta-price strong{color:#FFD700}
+.cta-btn{display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;padding:18px 48px;font-size:18px;font-weight:800;border-radius:12px;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;box-shadow:0 4px 20px rgba(255,215,0,0.3)}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,215,0,0.4)}
+.cta-note{font-size:13px;color:rgba(255,255,255,0.35);margin-top:12px}
+
+/* FINAL CTA */
+.final-cta{background:linear-gradient(180deg,rgba(255,215,0,0.06),rgba(255,165,0,0.02));padding:80px 20px;text-align:center}
+.final-cta h2{font-size:clamp(28px,5vw,44px);font-weight:900;margin-bottom:16px;background:linear-gradient(135deg,#FFD700,#FFA500);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.final-cta p{font-size:18px;color:rgba(255,255,255,0.6);margin-bottom:32px}
+
+/* FOOTER */
+footer{text-align:center;padding:40px 20px;border-top:1px solid rgba(255,255,255,0.06)}
+footer p{font-size:13px;color:rgba(255,255,255,0.25);margin-bottom:8px}
+footer a{color:rgba(255,215,0,0.4);font-size:13px}
+
+@media(max-width:600px){
+.steps{flex-direction:column;align-items:center}
+.step-arrow{transform:rotate(90deg)}
+}
+</style>
 </head>
 <body>
-    <div class="logo">📐</div>
-    <h1>YOU ALREADY KNOW THIS.</h1>
-    <p>Social choreography for the high-stakes entrepreneur. Stop guessing the room. Start directing it with Z-Logic.</p>
 
-    <div class="video-container">
-        <iframe src="https://www.youtube.com/embed/fEI89MhPVLM?rel=0" title="The Angle" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-icon">📐</div>
+  <h1>WHAT'S YOUR ANGLE TODAY?</h1>
+  <p class="hero-sub">Every morning, one <span class="hero-highlight">actionable revenue move</span> personalized to your business. Not theory. Not motivation. A specific play you can execute <em>today</em> to make money.</p>
+</section>
+
+<!-- VIDEO -->
+<section class="video-section">
+  <div class="video-wrap">
+    <iframe src="https://www.youtube.com/embed/fEI89MhPVLM" title="The Angle" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- FIRST CTA -->
+<section class="cta-section">
+  <div class="cta-badge">📐 5-DAY FREE TRIAL</div>
+  <p class="cta-price">Then <strong>$19.99/mo</strong> — Cancel Anytime</p>
+  <a href="app.html" class="cta-btn">START YOUR FREE TRIAL</a>
+  <p class="cta-note">No credit card required. Just tap and go.</p>
+</section>
+
+<!-- WHAT IS IT -->
+<section class="what-section">
+  <h2>HERE'S WHAT YOU GET</h2>
+  <p class="desc">The Angle is your daily business strategist. Every morning, you open the app and get one revenue-generating idea — specific to your industry, ready to execute before lunch.</p>
+  <div class="what-grid">
+    <div class="what-card">
+      <div class="card-emoji">💰</div>
+      <h3>Daily Revenue Moves</h3>
+      <p>Not "think positive" fluff. Real plays: pricing strategies, referral triggers, upsell tactics, client acquisition moves you can run today.</p>
     </div>
-
-    <div class="pricing">
-        <span class="trial-badge">✨ 5-DAY FREE TRIAL</span>
-        <h2 style="color: #D4AF37;">Then $19.99/mo — Cancel Anytime</h2>
+    <div class="what-card">
+      <div class="card-emoji">🎯</div>
+      <h3>Personalized to Your Business</h3>
+      <p>Real estate, consulting, coaching, legal, healthcare, trades, fitness — pick your category and every angle speaks your language.</p>
     </div>
-
-    <a href="app.html" class="cta-button">START YOUR FREE TRIAL</a>
-
-    <div class="footer">
-        &copy; 2026 MindWell Solution Group LLC<br>
-        <a href="app.html" class="member-login">Member Login &rarr;</a>
+    <div class="what-card">
+      <div class="card-emoji">🧠</div>
+      <h3>Z-Logic Intelligence</h3>
+      <p>Our AI director cue personalizes each angle to you — your name, your field, your context. It's like having a business strategist in your pocket.</p>
     </div>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                for (let registration of registrations) { registration.unregister(); }
-            });
-            caches.keys().then(function(names) {
-                for (let name of names) caches.delete(name);
-            });
-        }
-    </script>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <h2>HOW IT WORKS</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Open</h3>
+      <p>Every morning, open The Angle. Takes 10 seconds.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Read Your Angle</h3>
+      <p>One card. One revenue idea. Specific, tactical, ready to execute.</p>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Act On It</h3>
+      <p>Hit ⚡ Act. Do the thing. Track your streak. Level up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE CARD -->
+<section class="sample-section">
+  <h2>HERE'S A REAL CARD</h2>
+  <p class="sub">This is what lands in your app every morning</p>
+  <div class="sample-card">
+    <div class="sample-label">📐 Today's Angle</div>
+    <div class="sample-date">Day 12</div>
+    <div class="sample-title">The Referral Multiplier</div>
+    <div class="sample-body">Ask your three best clients for one introduction each — not "do you know anyone" but "who's the one person in your network facing [specific problem]?" Specificity triples the response rate. Three asks. Three intros. Three new conversations by end of week.</div>
+    <div class="sample-cta">Ask three clients for one specific introduction each today.</div>
+    <div class="sample-director">📐 🎯 Deploy this right after delivering great results for a client.</div>
+  </div>
+</section>
+
+<!-- MID CTA -->
+<section class="cta-section">
+  <a href="app.html" class="cta-btn">TRY IT FREE FOR 5 DAYS</a>
+  <p class="cta-note">No credit card. No commitment. Just your first angle.</p>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="who-section">
+  <h2>BUILT FOR PEOPLE WHO DO THE WORK</h2>
+  <p class="sub">Entrepreneurs, contractors, and independents across every field</p>
+  <div class="categories">
+    <span class="cat-pill">🏠 Real Estate</span>
+    <span class="cat-pill">💼 Consulting</span>
+    <span class="cat-pill">🎯 Coaching</span>
+    <span class="cat-pill">⚖️ Legal</span>
+    <span class="cat-pill">🏥 Healthcare</span>
+    <span class="cat-pill">🔧 Trades</span>
+    <span class="cat-pill">💪 Fitness</span>
+    <span class="cat-pill">📊 Financial Services</span>
+    <span class="cat-pill">🎨 Creative</span>
+    <span class="cat-pill">💻 Technology</span>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <h2>EVERYTHING INSIDE</h2>
+  <div class="features-grid">
+    <div class="feature">
+      <div class="feat-icon">📅</div>
+      <h3>60 Daily Cards</h3>
+      <p>Two months of revenue moves</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🔥</div>
+      <h3>Streak Tracking</h3>
+      <p>Stay consistent, build momentum</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">📈</div>
+      <h3>XP & Levels</h3>
+      <p>Gamified progression system</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">🎯</div>
+      <h3>Director Cues</h3>
+      <p>AI-personalized advice for you</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">📱</div>
+      <h3>Works on Any Device</h3>
+      <p>Phone, tablet, desktop</p>
+    </div>
+    <div class="feature">
+      <div class="feat-icon">⚡</div>
+      <h3>Under 2 Minutes</h3>
+      <p>Quick to read, fast to act</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>QUESTIONS</h2>
+  <div class="faq-item">
+    <div class="faq-q">What exactly is an "angle"?</div>
+    <div class="faq-a">It's a specific, actionable revenue idea you can execute today. Not vague advice — a concrete play. "Call 5 expired listings with this script." "Email 3 past clients with this upsell." "Post this specific offer on LinkedIn." Something you can do before lunch that generates money.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How is it personalized to my business?</div>
+    <div class="faq-a">During setup, you pick your business category (real estate, consulting, coaching, etc.) and enter your name. Every card's director cue is tailored to your field with specific context for when and how to deploy it.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Do I need to download anything?</div>
+    <div class="faq-a">No app store download needed. The Angle works right in your browser on any device. You can add it to your home screen for a native app experience — takes 5 seconds.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">What happens after the free trial?</div>
+    <div class="faq-a">You get 5 days completely free — no credit card needed. After that, it's $19.99/month. Cancel anytime with one click. Less than a single client lunch.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">How long does it take each day?</div>
+    <div class="faq-a">Under 2 minutes to read your angle. The execution is up to you — but most plays can be started in 15 minutes or less.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Is this just motivational quotes?</div>
+    <div class="faq-a">Absolutely not. Every card is a tactical business move — pricing plays, referral scripts, upsell strategies, client acquisition tactics. This is a revenue tool, not a pep talk.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>YOUR NEXT MOVE IS WAITING</h2>
+  <p>60 days of revenue-generating angles. Personalized to your business. Starting now.</p>
+  <div class="cta-badge" style="margin-bottom:16px">📐 5-DAY FREE TRIAL</div><br>
+  <p class="cta-price">Then <strong>$19.99/mo</strong> — Cancel Anytime</p>
+  <a href="app.html" class="cta-btn">START YOUR FREE TRIAL</a>
+  <p class="cta-note">No credit card required</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 MindWell Solution Group LLC</p>
+  <a href="app.html">Member Login →</a> · <a href="privacy.html">Privacy Policy</a>
+</footer>
+
 </body>
 </html>

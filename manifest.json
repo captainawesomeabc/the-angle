@@ -1,12 +1,17 @@
 {
-  "name": "The Angle – Social Choreography",
+  "name": "The Angle – What's Your Angle Today?",
   "short_name": "The Angle",
-  "description": "Your daily social edge. AI-powered moves for independent professionals.",
+  "description": "One daily revenue-generating move personalized to your business. 60-day AI-powered money moves for entrepreneurs and independent professionals.",
   "start_url": "/app.html",
+  "scope": "/",
+  "id": "/app.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1a1a2e",
   "theme_color": "#B8860B",
+  "categories": ["business", "productivity", "finance"],
+  "lang": "en-US",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/icon-192.png",

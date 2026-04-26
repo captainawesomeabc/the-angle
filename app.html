@@ -656,5 +656,60 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register('/sw.js').catch(()=>{});
 }
 </script>
+
+<!-- TRIAL GATING SYSTEM -->
+<style>
+#trial-banner{position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;text-align:center;padding:10px 16px;font-weight:bold;font-size:13px;z-index:99999;letter-spacing:0.5px;box-shadow:0 2px 10px rgba(0,0,0,0.3)}
+#trial-banner .days{font-size:15px}
+#paywall-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.97);z-index:999999;overflow-y:auto}
+#paywall-overlay.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:40px 20px}
+.pw-emoji{font-size:80px;margin-bottom:20px}
+.pw-title{font-size:28px;font-weight:800;color:#fff;margin-bottom:12px;text-align:center}
+.pw-sub{font-size:16px;color:rgba(255,255,255,0.7);max-width:400px;text-align:center;line-height:1.6;margin-bottom:30px}
+.pw-price{font-size:20px;color:#FFD700;font-weight:700;margin-bottom:8px}
+.pw-btn{display:inline-block;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;padding:18px 50px;text-decoration:none;font-weight:800;border-radius:12px;font-size:18px;letter-spacing:1px;text-transform:uppercase;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.pw-btn:hover{transform:scale(1.05);box-shadow:0 6px 30px rgba(0,0,0,0.4)}
+.pw-cancel{font-size:13px;color:rgba(255,255,255,0.4);margin-top:16px;cursor:pointer}
+body{padding-top:44px!important}
+</style>
+
+<div id="trial-banner"></div>
+
+<div id="paywall-overlay">
+  <div class="pw-emoji">📐</div>
+  <div class="pw-title">Your Free Trial Has Ended</div>
+  <div class="pw-sub">You've experienced 5 days of The Angle. Ready to keep going? Unlock all 60 days of game-changing content.</div>
+  <div class="pw-price">$9.99/month</div>
+  <a href="https://buy.stripe.com/7sY00ka8veoUft8eY7fjG02" class="pw-btn">SUBSCRIBE NOW</a>
+  <div class="pw-cancel" onclick="document.getElementById('paywall-overlay').classList.remove('active')">Maybe later</div>
+</div>
+
+<script>
+(function(){
+  const TRIAL_DAYS = 5;
+  const KEY = 'the_angle_trial_start';
+  
+  // Set trial start on first visit
+  if(!localStorage.getItem(KEY)){
+    localStorage.setItem(KEY, new Date().toISOString());
+  }
+  
+  const start = new Date(localStorage.getItem(KEY));
+  const now = new Date();
+  const elapsed = Math.floor((now - start) / (1000*60*60*24));
+  const remaining = Math.max(0, TRIAL_DAYS - elapsed);
+  const banner = document.getElementById('trial-banner');
+  const paywall = document.getElementById('paywall-overlay');
+  
+  if(remaining > 0){
+    banner.innerHTML = '📐 FREE TRIAL — <span class="days">' + remaining + ' day' + (remaining!==1?'s':'') + ' remaining</span>';
+  } else {
+    banner.innerHTML = '📐 TRIAL ENDED — <a href="https://buy.stripe.com/7sY00ka8veoUft8eY7fjG02" style="color:#000;text-decoration:underline;font-weight:800">Subscribe to continue</a>';
+    paywall.classList.add('active');
+  }
+})();
+</script>
+<!-- END TRIAL GATING -->
+
 </body>
 </html>

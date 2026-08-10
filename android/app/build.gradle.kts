@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "ai.theangle.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "ai.theangle.app"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 3
         versionName = "1.2"
     }

@@ -20,33 +20,11 @@ workflows:
         export CM_KEYSTORE_PASSWORD=AngleUpload2026
         export CM_KEY_ALIAS=angle-upload
         export CM_KEY_PASSWORD=AngleUpload2026
-    - name: Generate launcher icons
-      script: |
-        RES_DIR=$CM_BUILD_DIR/android/app/src/main/res
-        for density_size in "mipmap-mdpi:48" "mipmap-hdpi:72" "mipmap-xhdpi:96" "mipmap-xxhdpi:144" "mipmap-xxxhdpi:192"; do
-          density=$(echo $density_size | cut -d: -f1)
-          size=$(echo $density_size | cut -d: -f2)
-          mkdir -p $RES_DIR/$density
-          # Create simple solid-color placeholder icons
-          python3 -c "
-        import struct, zlib
-        w=h=$size
-        def chunk(t,d):return struct.pack('>I',len(d))+t+d+struct.pack('>I',zlib.crc32(t+d)&0xffffffff)
-        raw=b''
-        for y in range(h):
-          raw+=b'\x00'
-          for x in range(w):raw+=b'\x8b\x5c\xf6\xff'
-        c=zlib.compress(raw)
-        f=open('$RES_DIR/$density/ic_launcher.png','wb')
-        f.write(b'\x89PNG\r\n\x1a\n')
-        f.write(chunk(b'IHDR',struct.pack('>IIBBBBB',w,h,8,6,0,0,0)))
-        f.write(chunk(b'IDAT',c))
-        f.write(chunk(b'IEND',b''))
-        f.close()
-        "
-          cp $RES_DIR/$density/ic_launcher.png $RES_DIR/$density/ic_launcher_round.png
-        done
-        echo "Icons generated"
+    # Launcher icons are now committed directly to
+    # android/app/src/main/res/mipmap-*/ic_launcher*.png and
+    # android/app/ic_launcher-playstore.png (real branded icons).
+    # The placeholder icon-generation step was removed so CI no longer
+    # overwrites them with solid-color squares.
     - name: Build AAB
       script: |
         cd $CM_BUILD_DIR/android

@@ -16,7 +16,7 @@ jobs:
         with:
           gradle-version: '8.7'
       - name: Suppress SDK warning
-        run: echo "android.suppressUnsupportedCompileSdk=35" >> android/gradle.properties
+        run: echo "android.suppressUnsupportedCompileSdk=36" >> android/gradle.properties
       - name: Decode Keystore
         run: base64 -d android/keystore.b64 > android/keystore.jks
       - name: Build Release AAB
